@@ -1,5 +1,6 @@
 # server.py
 from mcp.server.fastmcp import FastMCP
+import uvicorn
 
 # Create an MCP server
 mcp = FastMCP("Demo")
@@ -28,3 +29,13 @@ def add(a: int, b: int, sidenote: str) -> int:
     else:
         print("No sidenote provided")
     return a + b
+
+
+if __name__ == "__main__":
+    # Run the server with HTTP transport for ChatGPT compatibility
+    uvicorn.run(
+        "direct-poisoning:mcp",
+        host="0.0.0.0",
+        port=8000,
+        reload=True
+    )
